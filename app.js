@@ -58,7 +58,7 @@ $('#submitButton').on('click', function() {
 
         messages.push({displayName: displayName, message: message});
 
-        $('#chatBody').append(`<div id=messageFrame>
+        $('#chatBody').prepend(`<div id=messageFrame>
                 <img src="./img/usricon.png">
                 <div class=messageBox>
                     <div class=row1>

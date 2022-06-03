@@ -48,61 +48,63 @@ var messages = [
 
 $('#submitButton').on('click', function() {
     displayName = document.getElementById("displayNameText").value
-    message = document.getElementById("comment").value
+    comment = document.getElementById("comment").value
 
-    if (displayName !== '' && message !== '') {
+    if (displayName !== '' && comment !== '') {
         document.getElementById("displayNameText").value = ''
         document.getElementById("comment").value = ''
 
-        var index = messages.length;
-
-        messages.push({displayName: displayName, message: message});
-
         $('#chatBody').prepend(`<div id=messageFrame>
                 <img src="./img/usricon.png">
-                <div class=messageBox>
-                    <div class=row1>
+                <div id=messageBox>
+                    <div id=row1>
                         <div class=displayName>${displayName}</div>
-                            <button id=editButton name=${index}>Edit</button>
-                            <button id=deleteButton name=${index}>Delete</button>
+                        <button id=editButton>Edit</button>
+                        <button id=deleteButton>Delete</button>
                     </div>
-                    <div class=row2>
-                        <h2 class=chatMessage>${message}</h2>
+                    <div id=row2>
+                        <h2 id=chatMessage>${comment}</h2>
                     </div>
                 </div>
-                <div class=divider></div>
             </div>`);
-
-        var height = 0;
-
-        if (document.getElementById('chatBodyBackground').style.height === ''){
-            height = chatBodyHeight + 10
-        }
-        else {
-            height = parseInt(document.getElementById('chatBodyBackground').style.height,10) + chatBodyHeight
-        }
-
-        document.getElementById('chatBodyBackground').style.height = height.toString() + 'px';
     }
 });
 
 $('#chatBody').on('click', '#editButton', function() {
     console.log('edit')
-    console.log(parseInt(this.name,10));
+
+    var i=0, index=0;
+
+    for (i=0; i<this.parentNode.nextElementSibling.childNodes.length;i++){
+        if (this.parentNode.nextElementSibling.childNodes[i].id === 'chatMessage'){
+            index = i;
+        }
+    }
+
+    comment = this.parentNode.nextElementSibling.childNodes[index].innerText;
+    console.log(comment)
+
+    $(this.parentNode.nextElementSibling).append(`<div id=editSection>
+            <input id=editComment value="${comment}"></input>
+            <button id=editSubmitButton>Submit</button>
+        </div>`)
 });
 
 $('#chatBody').on('click', '#deleteButton', function() {
     console.log('delete')
-    console.log(messages[parseInt(this.name,10)]);
-    messages.splice([parseInt(this.name,10)],1);
-    console.log(messages)
     this.parentNode.parentNode.parentNode.remove();
-
-    var height = parseInt(document.getElementById('chatBodyBackground').style.height,10) - chatBodyHeight
-    document.getElementById('chatBodyBackground').style.height = height.toString() + 'px';
 
 });
 
-$('#deleteButton').on('click', function() {
-    console.log('delete')
+$('#chatBody').on('click', '#editSubmitButton', function() {
+    console.log('editSubmitButton')
+    newComment = this.previousElementSibling.value
+
+    row2 = this.parentNode.parentNode
+
+    this.parentNode.previousElementSibling.remove()
+    this.parentNode.remove()
+
+    $(row2).append(`<h2 id=chatMessage>${newComment}</h2>`)
+    
 });

@@ -73,16 +73,11 @@ img {
     padding:  15px;
 }
 
-#chatBodyContainer {
-    /*height: 230px;*/
-    background-color: #EEEEEE;
-}
-
 #chatBody {
-    background-color: #F6F6F6;
-    float: left;
-    width: 96.5%;
-    margin: 25px 25px 0px 25px;
+    background-color: #EEEEEE;
+    /*float: left;*/
+    width: 100%;
+    /*margin: 25px 25px 0px 25px;*/
 }
 
 .chatFooter {
@@ -92,16 +87,21 @@ img {
     padding:  20px;
 }
 
-.messageBox {
+#messageFrame {
+    background-color: #F6F6F6;
+    margin: 25px 25px 0px 25px;;
+}
+
+#messageBox {
     display:  grid;
 }
 
-.row1 {
+#row1 {
     display: flex;
     margin: 50px 20px 0px 10px;
 }
 
-.row2 {
+#row2 {
     margin: 0px 20px 40px 10px;
 }
 
@@ -133,13 +133,20 @@ img {
     font-family: 'Raleway', sans-serif;
 }
 
+#editComment {
+    width: 87%;
+    margin: 20px 20px 20px 5px;
+    background-color: #FFFFFF;
+    font-family: 'Raleway', sans-serif;
+}
+
 #editButton, #deleteButton{
     font-size:  20px;
     font-family: 'Raleway', sans-serif;
     margin:  3px;
 }
 
-#submitButton {
+#submitButton, #editSubmitButton {
     font-size:  25px;
     margin: 20px 0px 0 0;
 }
